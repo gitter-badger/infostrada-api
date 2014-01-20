@@ -1,5 +1,5 @@
 module Infostrada
-  class Base
+  class BaseRequest
     include HTTParty
 
     # Uncomment to debug HTTParty calls.
@@ -12,6 +12,7 @@ module Infostrada
     # football path already in the base_uri.
     base_uri 'demo.api.infostradasports.com/svc/Football.svc/json/'
 
+    # TODO: these should be configurable
     # The authentication is made using basic_auth.
     basic_auth 'APIdemo', 'Sauv@k@vel4'
 
