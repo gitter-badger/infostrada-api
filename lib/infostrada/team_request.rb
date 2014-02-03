@@ -9,7 +9,7 @@ module Infostrada
 
       teams = []
       list.each do |team_hash|
-        teams << Team.new(team_hash)
+        teams << Team.new(team_hash.merge('edition_id' => edition_id.to_i))
       end
 
       teams
