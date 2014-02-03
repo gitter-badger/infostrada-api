@@ -3,5 +3,43 @@
 $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + "/../lib"))
 
 require 'infostrada'
+require 'infostrada/commands'
+require 'colored'
+require 'readline'
 
-command = gets
+module Infostrada
+  puts "Loading Infostrada API #{Infostrada::VERSION}"
+
+  VALID_COMMANDS = %w(exit show-squad show-teams show-player editions select-edition)
+
+  comp = Proc.new { |s| VALID_COMMANDS.grep( /^#{Regexp.escape(s)}/ ) }
+
+  Readline.completion_append_character = ' '
+  Readline.completion_proc = comp
+
+  # Ignore CTRL+C
+  trap('INT', 'SIG_IGN')
+
+  def self.execute_command(input)
+    command, *parameters = input.split("\s")
+    method = command.gsub('-', '_')
+
+    if VALID_COMMANDS.include?(command)
+      if parameters
+        Commands.send(method, *parameters)
+      else
+        Commands.send(method)
+      end
+    else
+      puts "Invalid command `#{command}'".red
+    end
+  end
+
+  loop do
+    line = Readline::readline("#{Commands.selected_edition_string}> ".magenta, true)
+
+    break if line.nil? || line == 'exit'
+
+    execute_command(line)
+  end
+end
