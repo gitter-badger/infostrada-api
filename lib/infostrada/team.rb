@@ -1,6 +1,6 @@
 module Infostrada
   class Team
-    attr_accessor :id, :name, :short_name, :nation
+    attr_accessor :id, :name, :short_name, :nation, :edition_id
 
     def self.all(edition_id)
       teams = TeamRequest.get_edition(edition_id.to_i)
@@ -10,6 +10,7 @@ module Infostrada
       @id = hash.delete('n_TeamID')
       @name = hash.delete('c_Team')
       @short_name = hash.delete('c_TeamShort')
+      @edition_id = hash.delete('edition_id')
 
       @nation = Nation.new
       set_nation_attributes(hash)
