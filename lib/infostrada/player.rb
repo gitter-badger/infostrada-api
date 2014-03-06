@@ -7,7 +7,8 @@ module Infostrada
       @person_id   = hash['n_PersonID']
       @name = hash['c_Person']
       @short_name = hash['c_PersonShort']
-      @birthdate = hash['d_BirthDate']
+
+      @birthdate = Formatter.format_date(hash['d_BirthDate'])
 
       # Function can be one of the folowing strings:
       # "Goalkeeper", "Defender", "Midfielder", "Forward" or "Coach"

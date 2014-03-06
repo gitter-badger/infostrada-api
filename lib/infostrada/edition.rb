@@ -14,7 +14,7 @@ module Infostrada
     def initialize(hash)
       @id = hash.delete('n_EditionID')
       @season = hash.delete('c_Season')
-      @start_date = hash.delete('d_EditionStartDate')
+      @start_date = Formatter.format_date(hash.delete('d_EditionStartDate'))
       @end_date = hash.delete('d_EditionEndDate')
 
       @competition = Competition.new(hash)

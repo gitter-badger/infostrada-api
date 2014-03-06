@@ -1,4 +1,5 @@
 module Infostrada
+  # The class containing the methods used by the command line tool.
   class Commands
     class << self
       attr_accessor :selected_edition
@@ -18,7 +19,7 @@ module Infostrada
 
       def select_edition(edition_id)
         get_editions
-        @selected_edition = @editions.find { |e| e.id == edition_id.to_i }
+        @selected_edition = @editions.find { |edition| edition.id == edition_id.to_i }
       end
 
       def show_teams
@@ -40,15 +41,22 @@ module Infostrada
 
       def show_player(person_id)
         person = PersonInfo.where(person_id: person_id)
-        print "#{person.public_name}".bold.yellow
-        print person.nickname ? " (#{person.nickname})\n" : "\n"
-        puts "Date of birth: #{person.birthdate}"
-        puts "Weight: #{person.weight}"
-        puts "Height: #{person.height}"
-        puts "Born: #{person.birth_city} / #{person.birth_country}"
+        nickname = person.nickname
+
+        print_person(person, nickname)
       end
 
       private
+
+      def print_person(person, nickname)
+        print "#{person.public_name}".bold.yellow
+        print nickname ? " (#{nickname})\n" : "\n"
+
+        puts "Date of birth: #{person.birthdate}
+                     Weight: #{person.weight}
+                     Height: #{person.height}
+                     Born: #{person.birth_city} / #{person.birth_country}"
+      end
 
       def print_id_col(id)
         id = sprintf('%9s', id)

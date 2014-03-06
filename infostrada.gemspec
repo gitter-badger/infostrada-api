@@ -1,18 +1,29 @@
-require File.expand_path('../lib/infostrada/version', __FILE__)
+# coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'infostrada/version'
 
-Gem::Specification.new do |s|
-  s.authors       = ['Ricardo Otero']
-  s.email         = ['oterosantos@gmail.com']
-  s.description   = s.summary = 'Infostrada Football API wrapper'
-  s.homepage      = ''
-  s.license       = 'LGPL-3.0'
+Gem::Specification.new do |spec|
+  spec.name          = 'infostrada'
+  spec.version       = Infostrada::VERSION
+  spec.authors       = ['Ricardo Otero']
+  spec.email         = ['oterosantos@gmail.com']
+  spec.summary       = 'Infostrada Football API wrapper.'
+  spec.description   = 'Infostrada Football API wrapper.'
+  spec.homepage      = ''
+  spec.license       = 'MIT'
 
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.files         = Dir['{lib}/**/*.rb', 'bin/*', '*.md']
-  s.test_files    = `git ls-files -- test/*`.split("\n")
-  s.name          = 'infostrada'
-  s.require_paths = ['lib']
-  s.version       = Infostrada::VERSION
+  spec.files         = `git ls-files -z`.split("\x0")
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.require_paths = ['lib']
 
-  s.add_dependency 'httparty', '~> 0.12'
+  spec.add_development_dependency 'bundler', '~> 1.5'
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'reek'
+  spec.add_development_dependency 'rubocop'
+
+  spec.add_dependency 'httparty', '~> 0.12'
+  spec.add_dependency 'colored'
+  spec.add_dependency 'rb-readline'
 end

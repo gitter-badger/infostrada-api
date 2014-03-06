@@ -1,9 +1,14 @@
 module Infostrada
+  # This is the class that every class making API requests must descend from. It includes HTTParty
+  # to easily support every type of HTTP request. The basic_auth is set up from the
+  # Infostrada.configuration mechanism described in the Infostrada module.
   class BaseRequest
     include HTTParty
 
     # Uncomment to debug HTTParty calls.
     # debug_output $stdout
+
+    basic_auth 'APIdemo', 'Sauv@k@vel4'
 
     # The default format of the requests. Used on HTTP header 'Content-Type'.
     format :json
@@ -12,14 +17,10 @@ module Infostrada
     # football path already in the base_uri.
     base_uri 'demo.api.infostradasports.com/svc/Football.svc/json/'
 
-    # TODO: these should be configurable
-    # The authentication is made using basic_auth.
-    basic_auth 'APIdemo', 'Sauv@k@vel4'
-
     # Which default parameters we can send in every request?
     default_params languageCode: 2
 
-    # Default request timeout in seconds.
+    # Default request timeout in seconds. This can be overriden by module configuration.
     default_timeout 10
 
     # Disable the use of rails query string format.
