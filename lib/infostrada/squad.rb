@@ -1,3 +1,5 @@
+require 'infostrada/base_request'
+
 module Infostrada
   class Squad < Infostrada::BaseRequest
     URL = '/GetSquad'

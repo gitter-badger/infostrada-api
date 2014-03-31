@@ -1,3 +1,5 @@
+require 'infostrada/base_request'
+
 module Infostrada
   class PersonInfo < Infostrada::BaseRequest
     URL = '/GetPersonInfo'

@@ -1,3 +1,5 @@
+require 'infostrada/base_request'
+
 module Infostrada
   class TeamRequest < Infostrada::BaseRequest
     URLS = {

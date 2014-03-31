@@ -1,3 +1,5 @@
+require 'infostrada/base_request'
+
 module Infostrada
   class TeamInfo < BaseRequest
     attr_accessor :official_name, :official_short_name, :public_name, :public_short_name, :nickname

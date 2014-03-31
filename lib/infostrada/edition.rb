@@ -1,3 +1,5 @@
+require 'forwardable'
+
 module Infostrada
   class Edition
     extend Forwardable

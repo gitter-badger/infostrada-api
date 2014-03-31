@@ -8,7 +8,7 @@ module Infostrada
     # Uncomment to debug HTTParty calls.
     # debug_output $stdout
 
-    basic_auth 'APIdemo', 'Sauv@k@vel4'
+    basic_auth 'APIdemo', 'saTo1991W&dy'
 
     # The default format of the requests. Used on HTTP header 'Content-Type'.
     format :json
@@ -26,7 +26,7 @@ module Infostrada
     # Disable the use of rails query string format.
     #
     # With rails query string format enabled:
-    #   => get '/', :query => {:selected_ids => [1,2,3]}
+    #   => get '/', :query => { selected_ids: [1,2,3] }
     #
     # Would translate to this:
     #   => /?selected_ids[]=1&selected_ids[]=2&selected_ids[]=3

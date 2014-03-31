@@ -4,7 +4,6 @@ require 'httparty'
 
 require 'infostrada/core_ext/string'
 
-require 'infostrada/base_request'
 require 'infostrada/competition'
 
 require 'infostrada/edition'
@@ -14,9 +13,14 @@ require 'infostrada/errors'
 
 require 'infostrada/nation'
 
+require 'infostrada/formatter'
+
 require 'infostrada/team'
 require 'infostrada/team_request'
 require 'infostrada/team_info'
+
+require 'infostrada/match'
+require 'infostrada/phase'
 
 require 'infostrada/squad'
 require 'infostrada/player'
