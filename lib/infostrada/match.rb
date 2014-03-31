@@ -98,8 +98,8 @@ module Infostrada
       edition_id = options.delete(:edition_id)
       match_id = options.delete(:id)
 
-      list = get(URLS[:list], query: { editionid: edition_id.to_i }) if edition_id
-      list = get(URLS[:single], query: { matchid: match_id.to_i }) if match_id
+      list = get!(URLS[:list], query: { editionid: edition_id.to_i }) if edition_id
+      list = get!(URLS[:single], query: { matchid: match_id.to_i }) if match_id
 
       list
     end

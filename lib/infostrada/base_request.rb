@@ -5,6 +5,9 @@ module Infostrada
   class BaseRequest
     include HTTParty
 
+    # How many times should we retry the request if Timeout::Error is raised?
+    RETRIES = 5
+
     # Uncomment to debug HTTParty calls.
     # debug_output $stdout
 
@@ -32,5 +35,21 @@ module Infostrada
     #   => /?selected_ids[]=1&selected_ids[]=2&selected_ids[]=3
     #
     disable_rails_query_string_format
+
+    # Used with Timeout::Error rescue so we can keep trying to fetch the information after timeout.
+    def self.get!(path, options = {}, &block)
+      attempts = 1
+      result = nil
+
+      begin
+        result = get(path, options, &block)
+      rescue Timeout::Error => error
+        puts "Timeout! Retrying... (#{attempts})"
+        attempts += 1
+        retry unless attempts > RETRIES
+      end
+
+      result
+    end
   end
 end

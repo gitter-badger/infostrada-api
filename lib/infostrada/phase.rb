@@ -20,7 +20,7 @@ module Infostrada
     def self.where(options = {})
       edition_id = options.delete(:edition_id)
 
-      list = get(URL, query: { editionid: edition_id.to_i })
+      list = get!(URL, query: { editionid: edition_id.to_i })
 
       phases = []
       list.each do |phase_hash|

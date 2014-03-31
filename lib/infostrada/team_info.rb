@@ -1,7 +1,7 @@
 require 'infostrada/base_request'
 
 module Infostrada
-  class TeamInfo < BaseRequest
+  class TeamInfo < Infostrada::BaseRequest
     attr_accessor :official_name, :official_short_name, :public_name, :public_short_name, :nickname
     attr_accessor :foundation_date, :official_stadium_name, :stadium_name, :stadium_capacity
     attr_accessor :url, :city
@@ -9,7 +9,7 @@ module Infostrada
     URL = '/GetTeamInfo'
 
     def self.fetch(team_id)
-      info_hash = get(URL, query: { teamid: team_id.to_i })
+      info_hash = get!(URL, query: { teamid: team_id.to_i })
 
       self.new(info_hash.first)
     end
@@ -26,6 +26,8 @@ module Infostrada
       @stadium_capacity       =  hash['n_StadiumCapacity']
       @url                    =  hash['c_URL']
       @city                   =  hash['c_City']
+
+      self
     end
   end
 end

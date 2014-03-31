@@ -18,8 +18,13 @@ module Infostrada
       # Season statistics
       set_season_stats(hash)
 
-      @nation = Nation.new
-      set_nation_attributes(hash)
+      @nation = Nation.new(hash, 'person')
+
+      self
+    end
+
+    def name?
+      @name && !@name.empty?
     end
 
     private
@@ -39,15 +44,6 @@ module Infostrada
       @season_stats[:cards_red]             = hash['n_CardsRed']
       @season_stats[:cards_red_direct]      = hash['n_CardsRedDirect']
       @season_stats[:cards_red_from_yellow] = hash['n_CardsRed2Yellow']
-    end
-
-    def set_nation_attributes(hash)
-      hash.each do |key, value|
-        if key =~ /[cn]_\w+Natio.*/
-          method = "#{key.snake_case.gsub(/[cn]_person_?/, '')}="
-          @nation.send(method, value)
-        end
-      end
     end
   end
 end

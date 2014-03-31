@@ -17,11 +17,11 @@ module Infostrada
 
       hash.each do |key, value|
         case key.snake_case
-        when /^[cn]\w+#{prefix}_team_id$/
+        when /^[cn]\w+#{prefix}_?team_id$/
           self.send('team_id=', value)
-        when /^[cn]\w+#{prefix}_team$/
+        when /^[cn]\w+#{prefix}_?team$/
           self.send('team_name=', value)
-        when /^[cn]\w+#{prefix}_team_short$/
+        when /^[cn]\w+#{prefix}_?team_short$/
           self.send('team_short=', value)
         end
       end

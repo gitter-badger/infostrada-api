@@ -9,7 +9,7 @@ module Infostrada
 
     def self.where(options)
       id = options.delete(:person_id)
-      info = get(URL, query: { personid: id }).first
+      info = get!(URL, query: { personid: id }).first
       self.new(id, info)
     end
 

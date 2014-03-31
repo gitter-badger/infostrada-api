@@ -7,7 +7,7 @@ module Infostrada
     }
 
     def self.get_list
-      list = get(URLS[:list])
+      list = get!(URLS[:list])
 
       editions = []
       list.each do |edition_hash|
