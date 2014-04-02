@@ -1,7 +1,7 @@
 module Infostrada
   class Player
     attr_accessor :person_id, :name, :short_name, :birthdate, :function, :shirt_number
-    attr_accessor :season_stats, :nation
+    attr_accessor :season_stats, :nation, :contract_starts_at, :contract_ends_at
 
     def initialize(hash)
       @person_id   = hash['n_PersonID']
@@ -14,6 +14,9 @@ module Infostrada
       # "Goalkeeper", "Defender", "Midfielder", "Forward" or "Coach"
       @function = hash['c_Function']
       @shirt_number = hash['n_ShirtNr']
+
+      @contract_starts_at = Formatter.format_date(hash['d_ContractStartDate'])
+      @contract_ends_at = Formatter.format_date(hash['d_ContractEndDate'])
 
       # Season statistics
       set_season_stats(hash)

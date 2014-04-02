@@ -8,7 +8,8 @@ module Infostrada
 
     attr_accessor :id, :name, :short_name, :nation, :edition_id
 
-    def self.all(edition_id)
+    def self.where(options = {})
+      edition_id = options.delete(:edition_id)
       teams = TeamRequest.get_edition(edition_id.to_i)
     end
 
