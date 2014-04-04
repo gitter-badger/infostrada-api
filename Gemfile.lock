@@ -1,25 +1,32 @@
 PATH
   remote: .
   specs:
-    infostrada (0.0.1)
+    infostrada (0.0.9)
       colored
       httparty (~> 0.12)
       rb-readline
+      tzinfo
 
 GEM
   remote: https://rubygems.org/
   specs:
     ast (1.1.0)
+    coderay (1.1.0)
     colored (1.2)
-    httparty (0.12.0)
+    httparty (0.13.0)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     json (1.8.1)
+    method_source (0.8.2)
     multi_xml (0.5.5)
     parser (2.1.4)
       ast (~> 1.1)
       slop (~> 3.4, >= 3.4.5)
     powerpack (0.0.9)
+    pry (0.9.12.6)
+      coderay (~> 1.0)
+      method_source (~> 0.8)
+      slop (~> 3.4)
     rainbow (2.0.0)
     rake (10.1.1)
     rb-readline (0.5.1)
@@ -39,6 +46,7 @@ GEM
       sexp_processor (~> 4.1)
     sexp_processor (4.4.1)
     slop (3.4.7)
+    tzinfo (0.3.39)
 
 PLATFORMS
   ruby
@@ -46,6 +54,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.5)
   infostrada!
+  pry
   rake
   reek
   rubocop

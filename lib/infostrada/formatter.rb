@@ -1,7 +1,7 @@
 module Infostrada
-  # This class is used to format types that come from infostrada like dates.
+  # This class is used to format types that come from Infostrada like dates.
   class Formatter
-    # Formats the stupid date format from Infostrada.
+    # Formats the strange date format from Infostrada.
     def self.format_date(date)
       if date && match = date.match(/\/Date\(([0-9]+)([\+\-])([0-9]+)\)\//i)
         # The date was in miliseconds since Unix epoch
@@ -12,9 +12,9 @@ module Infostrada
 
         final = stamp.send(match[2], offset)
 
-        Time.at(final).to_date
+        Time.at(final).utc
       else
-        Time.now.to_date
+        Time.now.utc
       end
     end
   end

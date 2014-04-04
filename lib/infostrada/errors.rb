@@ -4,4 +4,7 @@ module Infostrada
 
   class InvalidParameter < BaseError
   end
+
+  class RequestError < BaseError
+  end
 end

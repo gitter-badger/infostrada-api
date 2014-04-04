@@ -1,3 +1,5 @@
+require 'infostrada/endpoint_manager'
+
 module Infostrada
   # This is the class that every class making API requests must descend from. It includes HTTParty
   # to easily support every type of HTTP request. The basic_auth is set up from the
@@ -21,10 +23,19 @@ module Infostrada
     base_uri 'demo.api.infostradasports.com/svc/Football.svc/json/'
 
     # Which default parameters we can send in every request?
+    #
+    # languageCode can be one of the following:
+    # 1 = dutch
+    # 2 = english
+    # 4 = french
+    # 8 = german
+    # 128 = norwegian
+    # 256 = swedish
+    # 1024 = danish
     default_params languageCode: 2
 
     # Default request timeout in seconds. This can be overriden by module configuration.
-    default_timeout 10
+    default_timeout 15
 
     # Disable the use of rails query string format.
     #
@@ -36,6 +47,16 @@ module Infostrada
     #
     disable_rails_query_string_format
 
+    class << self
+      attr_accessor :endpoint
+
+      def register_endpoint(endpoint)
+        self.endpoint = endpoint
+
+        EndpointManager.register(endpoint => self)
+      end
+    end
+
     # Used with Timeout::Error rescue so we can keep trying to fetch the information after timeout.
     def self.get!(path, options = {}, &block)
       attempts = 1
@@ -43,10 +64,14 @@ module Infostrada
 
       begin
         result = get(path, options, &block)
-      rescue Timeout::Error => error
+      rescue Timeout::Error => e
         puts "Timeout! Retrying... (#{attempts})"
         attempts += 1
-        retry unless attempts > RETRIES
+        if attempts > RETRIES
+          raise Infostrada::RequestError.new, 'Request timeout'
+        else
+          retry
+        end
       end
 
       result

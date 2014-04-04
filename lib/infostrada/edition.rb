@@ -20,10 +20,17 @@ module Infostrada
       @end_date = Formatter.format_date(hash.delete('d_EditionEndDate'))
 
       @competition = Competition.new(hash)
+
+      self
     end
 
     def teams
       Team.all(id)
+    end
+
+    # Get phases for this edition
+    def phases
+      Phase.where(edition_id: id)
     end
   end
 end

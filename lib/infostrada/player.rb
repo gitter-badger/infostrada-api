@@ -3,6 +3,18 @@ module Infostrada
     attr_accessor :person_id, :name, :short_name, :birthdate, :function, :shirt_number
     attr_accessor :season_stats, :nation, :contract_starts_at, :contract_ends_at
 
+    # The function_type variable maps Infostradas n_FunctionType and can have one of these values:
+    #
+    # 1 = Keeper
+    # 2 = Defender
+    # 4 = Midfielder
+    # 8 = Forward
+    # 16 = Trainer
+    # 64 = Referee
+    # 128 = Linesman
+    # 1073741824 = 4th Official
+    attr_accessor :function_type
+
     def initialize(hash)
       @person_id   = hash['n_PersonID']
       @name = hash['c_Person']
@@ -10,9 +22,10 @@ module Infostrada
 
       @birthdate = Formatter.format_date(hash['d_BirthDate'])
 
-      # Function can be one of the folowing strings:
-      # "Goalkeeper", "Defender", "Midfielder", "Forward" or "Coach"
+      # Function is one string like "Goalkeeper", "Defender", "Midfielder", "Forward", "Coach"...
+      # Infostrada doesn't document the function strings so you should rely on function_type
       @function = hash['c_Function']
+      @function_type = hash['n_FunctionType']
       @shirt_number = hash['n_ShirtNr']
 
       @contract_starts_at = Formatter.format_date(hash['d_ContractStartDate'])

@@ -21,10 +21,13 @@ require 'infostrada/team_info'
 
 require 'infostrada/match'
 require 'infostrada/phase'
+require 'infostrada/table'
 
 require 'infostrada/squad'
 require 'infostrada/player'
 require 'infostrada/person_info'
+
+require 'infostrada/call_refresh'
 
 require 'infostrada/version'
 
@@ -32,7 +35,7 @@ module Infostrada
   # The configuration of the API requests. This configuration is also shared by
   # <Infostrada::BaseRequest> where the HTTParty configuration is done.
   class Configuration
-    attr_reader :user, :password, :timeout
+    attr_reader :user, :password, :timeout, :timezone
 
     def initialize
       BaseRequest.default_options[:basic_auth] ||= {}
@@ -58,7 +61,11 @@ module Infostrada
   end
 
   def self.configuration
-    @configuration ||=  Configuration.new
+    @configuration ||= Configuration.new
+  end
+
+  def self.endpoints
+    @endpoints ||= []
   end
 
   def self.configure

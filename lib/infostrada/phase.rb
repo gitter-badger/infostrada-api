@@ -1,5 +1,6 @@
 module Infostrada
   # Phase of a given edition.
+  #
   # The only thing that can be confusing is the current and currents boolean variables. Here's an
   # explanation from the Infostrada API website:
   #
@@ -30,6 +31,11 @@ module Infostrada
       phases
     end
 
+    # Get the classification table for this phase.
+    def table
+      Table.where(phase_id: id)
+    end
+
     def initialize(hash)
       @id = hash['n_PhaseID']
       @name = hash['c_Phase']
@@ -40,7 +46,7 @@ module Infostrada
       @phase2_name = hash['c_Phase2']
       @phase3_id = hash['n_Phase3ID']
       @phase3_name = hash['c_Phase3']
-      @table = hash['b_Table']
+      @has_table = hash['b_Table']
       @current = hash['b_Current']
       @currents = hash['b_Currents']
 
@@ -52,6 +58,10 @@ module Infostrada
       end
 
       self
+    end
+
+    def has_table?
+      @has_table
     end
   end
 end
