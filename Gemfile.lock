@@ -59,7 +59,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.5)
   infostrada!
-  pry
-  rake
-  reek
-  rubocop
+  pry (~> 0.9.12)
+  rake (~> 10.2.2)
+  reek (~> 1.3.7)
+  rubocop (~> 0.20.1)
