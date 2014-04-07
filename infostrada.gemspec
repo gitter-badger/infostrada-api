@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Ricardo Otero']
   spec.email         = ['oterosantos@gmail.com']
   spec.summary       = 'Infostrada Football API wrapper.'
-  spec.description   = 'Infostrada Football API wrapper.'
+  spec.description   = spec.summary
   spec.homepage      = ''
   spec.license       = 'MIT'
 
@@ -27,5 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'colored'
   spec.add_dependency 'rb-readline'
   spec.add_dependency 'tzinfo'
+  spec.add_dependency 'eventmachine'
+
   spec.add_development_dependency 'pry'
 end

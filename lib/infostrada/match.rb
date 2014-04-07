@@ -67,10 +67,11 @@ module Infostrada
 
     # We can get all matches for a given edition (very heavy payload). Or we can just get the match
     # information on a single match.
-    register_endpoint 'GetMatchList_Edition'
-    #  single: '/GetMatchInfo',
-    #  live_list: '/GetMatchLiveList_Date'
-    #}
+    URLS = {
+      list: '/GetMatchList_Edition',
+      single: '/GetMatchInfo',
+      live_list: '/GetMatchLiveList_Date'
+    }
 
     def self.where(options = {})
       list = get_match_list(options)

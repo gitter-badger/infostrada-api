@@ -1,5 +1,3 @@
-require 'infostrada/endpoint_manager'
-
 module Infostrada
   # This is the class that every class making API requests must descend from. It includes HTTParty
   # to easily support every type of HTTP request. The basic_auth is set up from the
@@ -46,16 +44,6 @@ module Infostrada
     #   => /?selected_ids[]=1&selected_ids[]=2&selected_ids[]=3
     #
     disable_rails_query_string_format
-
-    class << self
-      attr_accessor :endpoint
-
-      def register_endpoint(endpoint)
-        self.endpoint = endpoint
-
-        EndpointManager.register(endpoint => self)
-      end
-    end
 
     # Used with Timeout::Error rescue so we can keep trying to fetch the information after timeout.
     def self.get!(path, options = {}, &block)
