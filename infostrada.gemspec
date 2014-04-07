@@ -26,6 +26,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'httparty', '~> 0.13', '>= 0.13.0'
   spec.add_dependency 'colored', '~> 1.2'
-  spec.add_dependency 'tzinfo', '~> 1.1', '>= 1.1.0'
+  spec.add_dependency 'tzinfo', '~> 0.3', '>= 0.3.37'
   spec.add_dependency 'eventmachine', '~> 1.0', '>= 1.0.3'
 end
