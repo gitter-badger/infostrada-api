@@ -6,12 +6,12 @@ module Infostrada
     include HTTParty
 
     # How many times should we retry the request if Timeout::Error is raised?
-    RETRIES = 5
+    RETRIES = Infostrada.configuration.retries || 5
 
     # Uncomment to debug HTTParty calls.
     # debug_output $stdout
 
-    basic_auth 'APIdemo', 'saTo1991W&dy'
+    basic_auth Infostrada.configuration.username, Infostrada.configuration.password
 
     # The default format of the requests. Used on HTTP header 'Content-Type'.
     format :json
@@ -33,7 +33,7 @@ module Infostrada
     default_params languageCode: 2
 
     # Default request timeout in seconds. This can be overriden by module configuration.
-    default_timeout 15
+    default_timeout Infostrada.configuration.timeout || 15
 
     # Disable the use of rails query string format.
     #

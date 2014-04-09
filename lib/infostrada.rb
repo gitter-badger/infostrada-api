@@ -2,6 +2,42 @@ require 'rubygems'
 
 require 'httparty'
 
+module Infostrada
+  # The configuration of the API requests.
+  class Configuration
+    attr_reader :username, :password, :timeout, :retries
+
+    def username=(username)
+      BaseRequest.default_options[:basic_auth].merge!(username: username)
+      @username = username
+    end
+
+    def password=(password)
+      BaseRequest.default_options[:basic_auth].merge!(password: password)
+      @password = password
+    end
+
+    def timeout=(timeout)
+      BaseRequest.default_options[:basic_auth].merge!(password: password)
+      @timeout = timeout
+    end
+
+    def retries=(retries)
+      @retries = retries
+    end
+  end
+
+  class << self
+    def configuration
+      @configuration ||= Configuration.new
+    end
+
+    def configure
+      yield(configuration)
+    end
+  end
+end
+
 require 'infostrada/core_ext/string'
 
 require 'infostrada/competition'
@@ -30,45 +66,3 @@ require 'infostrada/person_info'
 require 'infostrada/call_refresh'
 
 require 'infostrada/version'
-
-module Infostrada
-  # The configuration of the API requests. This configuration is also shared by
-  # <Infostrada::BaseRequest> where the HTTParty configuration is done.
-  class Configuration
-    attr_reader :user, :password, :timeout, :timezone
-
-    def initialize
-      BaseRequest.default_options[:basic_auth] ||= {}
-    end
-
-    def user=(user)
-      BaseRequest.default_options[:basic_auth].merge!(username: user)
-      @user = user
-      self
-    end
-
-    def password=(password)
-      BaseRequest.default_options[:basic_auth].merge!(password: password)
-      @password = password
-      self
-    end
-
-    def timeout=(timeout)
-      BaseRequest.default_options[:timeout] = timeout
-      @timeout = timeout
-      self
-    end
-  end
-
-  def self.configuration
-    @configuration ||= Configuration.new
-  end
-
-  def self.endpoints
-    @endpoints ||= []
-  end
-
-  def self.configure
-    yield(configuration) if block_given?
-  end
-end
