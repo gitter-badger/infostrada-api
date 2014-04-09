@@ -18,7 +18,7 @@ module Infostrada
 
     # Base URI of the service. Since the gem is only football related for now we can have the
     # football path already in the base_uri.
-    base_uri 'demo.api.infostradasports.com/svc/Football.svc/json/'
+    base_uri "#{Infostrada.configuration.domain}/svc/Football.svc/json/"
 
     # Which default parameters we can send in every request?
     #

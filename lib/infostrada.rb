@@ -5,7 +5,7 @@ require 'httparty'
 module Infostrada
   # The configuration of the API requests.
   class Configuration
-    attr_reader :username, :password, :timeout, :retries
+    attr_reader :username, :password, :timeout, :retries, :domain
 
     def username=(username)
       BaseRequest.default_options[:basic_auth].merge!(username: username)
@@ -24,6 +24,10 @@ module Infostrada
 
     def retries=(retries)
       @retries = retries
+    end
+
+    def domain=(domain)
+      @domain = domain
     end
   end
 
