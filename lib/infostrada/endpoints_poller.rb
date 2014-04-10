@@ -39,6 +39,9 @@ module Infostrada
       end
     end
 
+    # Default frequency
+    set_frequency 15
+
     # Main cycle that calls EM.run and will then use the EndpointsPoller#process_endpoints method
     # to process the updated endpoints.
     def run
@@ -65,6 +68,9 @@ module Infostrada
     include EM::Deferrable
 
     def initialize(endpoints_whitelist)
+      # The CallRefresh endpoint is the one using 'Utility' instead of 'Football'.
+      Infostrada::CallRefresh.base_uri Infostrada::CallRefresh.base_uri.gsub(/Football/, 'Utility')
+
       begin
         updated = Infostrada::CallRefresh.get_latest
         updated = updated.select { |endpoint| endpoints_whitelist.include?(endpoint.method) }

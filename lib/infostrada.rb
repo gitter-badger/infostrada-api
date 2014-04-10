@@ -7,7 +7,8 @@ require 'infostrada/base_request'
 module Infostrada
   # The configuration of the API requests.
   class Configuration
-    attr_reader :username, :password, :timeout, :retries, :base_uri, :last_update_file
+    attr_reader :username, :password, :timeout, :base_uri
+    attr_accessor :last_update_file, :retries
 
     def username=(username)
       BaseRequest.default_options[:basic_auth] ||= {}

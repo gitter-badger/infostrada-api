@@ -9,7 +9,11 @@ module Infostrada
     RETRIES = 5
 
     # Uncomment to debug HTTParty calls.
-    # debug_output $stdout
+    debug_output $stdout
+
+    # TODO: can we delete this dummy values?
+    basic_auth 'USERNAME', 'PASSWORD'
+    base_uri = 'demo.api.infostradasports.com/svc/Football.svc/json/'
 
     # The default format of the requests. Used on HTTP header 'Content-Type'.
     format :json

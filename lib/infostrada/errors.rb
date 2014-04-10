@@ -7,4 +7,7 @@ module Infostrada
 
   class RequestError < BaseError
   end
+
+  class InfostradaError < BaseError
+  end
 end

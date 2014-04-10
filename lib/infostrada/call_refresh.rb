@@ -9,10 +9,6 @@ module Infostrada
     # call must be in the correct timezone.
     TIMEZONE = 'Europe/Amsterdam'
 
-    # This is the only method on Infostrada API that don't use /Football.svc but /Utility.svc
-    # instead, so we have to replace that on the default base_uri.
-    Infostrada::CallRefresh.base_uri Infostrada::CallRefresh.base_uri.gsub(/Football/, 'Utility')
-
     # Which languages are you interested in? The GetAPICallRefresh_Module call can return multiple
     # endpoints for the same thing if multiple languages are available.
     #
@@ -60,7 +56,9 @@ module Infostrada
     def self.since(date)
       date = date.strftime(DATE_FORMAT)
 
+      puts "REQUESTING"
       list = get!(URL, query: { from: date, outputType: OUTPUT_TYPE, module: 'football' })
+      puts "DONE"
 
       self.last_update = api_time(Time.now)
 
