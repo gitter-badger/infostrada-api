@@ -1,5 +1,8 @@
 require 'eventmachine'
 
+require 'infostrada/base_request'
+require 'infostrada/call_refresh'
+
 module Infostrada
   # This is the base class that you should subclass to make a new endpoints poller. You should also
   # call the EndpointsPoller.set_frequency and EndpointsPoller.listen_to and define a

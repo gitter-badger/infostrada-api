@@ -6,19 +6,13 @@ module Infostrada
     include HTTParty
 
     # How many times should we retry the request if Timeout::Error is raised?
-    RETRIES = Infostrada.configuration.retries || 5
+    RETRIES = 5
 
     # Uncomment to debug HTTParty calls.
     # debug_output $stdout
 
-    basic_auth Infostrada.configuration.username, Infostrada.configuration.password
-
     # The default format of the requests. Used on HTTP header 'Content-Type'.
     format :json
-
-    # Base URI of the service. Since the gem is only football related for now we can have the
-    # football path already in the base_uri.
-    base_uri "#{Infostrada.configuration.domain}/svc/Football.svc/json/"
 
     # Which default parameters we can send in every request?
     #
@@ -33,7 +27,7 @@ module Infostrada
     default_params languageCode: 2
 
     # Default request timeout in seconds. This can be overriden by module configuration.
-    default_timeout Infostrada.configuration.timeout || 15
+    default_timeout 15
 
     # Disable the use of rails query string format.
     #

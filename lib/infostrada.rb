@@ -1,24 +1,29 @@
 require 'rubygems'
-
 require 'httparty'
+
+require 'infostrada/core_ext/string'
+require 'infostrada/base_request'
 
 module Infostrada
   # The configuration of the API requests.
   class Configuration
-    attr_reader :username, :password, :timeout, :retries, :domain
+    attr_reader :username, :password, :timeout, :retries, :base_uri
 
     def username=(username)
+      BaseRequest.default_options[:basic_auth] ||= {}
       BaseRequest.default_options[:basic_auth].merge!(username: username)
       @username = username
     end
 
     def password=(password)
+      BaseRequest.default_options[:basic_auth] ||= {}
       BaseRequest.default_options[:basic_auth].merge!(password: password)
       @password = password
     end
 
+    # Default timeout is 15 seconds.
     def timeout=(timeout)
-      BaseRequest.default_options[:basic_auth].merge!(password: password)
+      BaseRequest.default_timeout(timeout)
       @timeout = timeout
     end
 
@@ -26,8 +31,13 @@ module Infostrada
       @retries = retries
     end
 
+    # Base URI of the service. Since the gem is only football related for now we can have the
+    # football path already in the base_uri.
     def domain=(domain)
-      @domain = domain
+      base_uri = "#{domain}/svc/Football.svc/json/"
+
+      BaseRequest.base_uri(base_uri)
+      @base_uri = base_uri
     end
   end
 
@@ -41,8 +51,6 @@ module Infostrada
     end
   end
 end
-
-require 'infostrada/core_ext/string'
 
 require 'infostrada/competition'
 
@@ -66,7 +74,5 @@ require 'infostrada/table'
 require 'infostrada/squad'
 require 'infostrada/player'
 require 'infostrada/person_info'
-
-require 'infostrada/call_refresh'
 
 require 'infostrada/version'
