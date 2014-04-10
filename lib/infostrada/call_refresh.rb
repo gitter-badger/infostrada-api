@@ -37,7 +37,7 @@ module Infostrada
     DATE_FORMAT = '%FT%T'
 
     def self.store
-      @store ||= PStore.new('infostrada.pstore')
+      @store ||= PStore.new(Infostrada.configuration.last_update_file)
     end
 
     def self.last_update

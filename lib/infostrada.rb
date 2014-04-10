@@ -7,7 +7,7 @@ require 'infostrada/base_request'
 module Infostrada
   # The configuration of the API requests.
   class Configuration
-    attr_reader :username, :password, :timeout, :retries, :base_uri
+    attr_reader :username, :password, :timeout, :retries, :base_uri, :last_update_file
 
     def username=(username)
       BaseRequest.default_options[:basic_auth] ||= {}
@@ -25,10 +25,6 @@ module Infostrada
     def timeout=(timeout)
       BaseRequest.default_timeout(timeout)
       @timeout = timeout
-    end
-
-    def retries=(retries)
-      @retries = retries
     end
 
     # Base URI of the service. Since the gem is only football related for now we can have the
