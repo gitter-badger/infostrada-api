@@ -9,7 +9,7 @@ module Infostrada
     RETRIES = 5
 
     # Uncomment to debug HTTParty calls.
-    debug_output $stdout
+    # debug_output $stdout
 
     # TODO: can we delete this dummy values?
     basic_auth 'USERNAME', 'PASSWORD'
