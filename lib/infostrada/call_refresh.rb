@@ -56,9 +56,7 @@ module Infostrada
     def self.since(date)
       date = date.strftime(DATE_FORMAT)
 
-      puts "REQUESTING"
       list = get!(URL, query: { from: date, outputType: OUTPUT_TYPE, module: 'football' })
-      puts "DONE"
 
       self.last_update = api_time(Time.now)
 
