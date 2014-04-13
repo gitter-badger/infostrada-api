@@ -81,7 +81,7 @@ module Infostrada
         matches << Match.new(match_hash)
       end
 
-      matches.size > 1 ? matches : matches.first
+      matches
     end
 
     def self.get_match_list(options)
