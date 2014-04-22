@@ -18,7 +18,7 @@ module Infostrada
     attr_accessor :stadium_id, :stadium_name, :goals, :match_status, :finished, :awarded
     attr_accessor :postponed, :referee, :spectators, :leg, :knockout_phase, :first_leg_score
     attr_accessor :aggregate_winner_id, :current_period_started_at, :status, :started_at, :started
-    attr_accessor :edition
+    attr_accessor :edition, :time_unknown, :date_unknown
 
     # Check if the live score, live goals and live lineups are already available
     attr_accessor :live, :live_score, :live_goals, :live_lineup
@@ -59,8 +59,8 @@ module Infostrada
     # day, n_MatchStatusCode is set to 512 (=Abandoned).
     attr_accessor :status_code
 
+    def_delegator :@phase, :id, :phase_id
     def_delegator :@referee, :name, :referee_name
-    def_delegator :@phase, :name, :phase_name
     def_delegator :@goals, :away_goals, :away_goals
     def_delegator :@goals, :home_goals, :home_goals
     def_delegator :@edition, :id, :edition_id
@@ -99,9 +99,11 @@ module Infostrada
 
     def initialize(hash)
       @id = hash['n_MatchID']
-      @date = Formatter.format_date(hash['d_DateUTC'])
+      @date = Formatter.format_date(hash['d_Date'])
       @rescheduled = hash['b_RescheduledToBeResumed']
       @round = hash['n_RoundNr']
+      @time_unknown = hash['b_TimeUnknown']
+      @date_unknown = hash['b_DateUnknown']
 
       @aggregate_winner_id = hash['n_WinnerOnAggregateTeamID']
       @current_period_started_at = Formatter.format_date(hash['d_CurrentPeriodStartTime'])
