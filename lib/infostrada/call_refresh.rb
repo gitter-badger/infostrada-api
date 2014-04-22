@@ -50,7 +50,7 @@ module Infostrada
     end
 
     def self.get_latest
-      updated_endpoints = since(last_update || api_time(Time.now))
+      since last_update || api_time(Time.now)
     end
 
     def self.since(date)
