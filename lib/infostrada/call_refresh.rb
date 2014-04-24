@@ -51,6 +51,7 @@ module Infostrada
 
     def self.get_latest
       since last_update || api_time(Time.now)
+      #since api_time(Time.now-100000)
     end
 
     def self.since(date)
@@ -80,6 +81,12 @@ module Infostrada
       @query_string = hash['c_QueryString']
 
       self
+    end
+
+    # Helper method to return the match id from the query string.
+    def match_id
+      @query_string.match(/matchid=(\d+)/)
+      $1
     end
   end
 end
