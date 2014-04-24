@@ -99,7 +99,7 @@ module Infostrada
 
     def initialize(hash)
       @id = hash['n_MatchID']
-      @date = Formatter.format_date(hash['d_Date'])
+      @date = Formatter.format_date(hash['d_DateUTC'])
       @rescheduled = hash['b_RescheduledToBeResumed']
       @round = hash['n_RoundNr']
       @time_unknown = hash['b_TimeUnknown']
