@@ -13,7 +13,7 @@ module Infostrada
 
       events = []
       list.each do |event_hash|
-        events << MatchEvent.new(event_hash)
+        events << MatchEvent.new(match_id.to_i, event_hash)
       end
 
       events
