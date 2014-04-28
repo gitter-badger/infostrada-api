@@ -50,8 +50,7 @@ module Infostrada
     end
 
     def self.get_latest
-      since last_update || api_time(Time.now)
-      #since api_time(Time.now-100000)
+      since api_time(Time.now-500000)
     end
 
     def self.since(date)
