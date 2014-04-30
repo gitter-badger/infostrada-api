@@ -28,4 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'colored', '~> 1.2'
   spec.add_dependency 'tzinfo', '>= 1.1.0'
   spec.add_dependency 'eventmachine', '~> 1.0', '>= 1.0.3'
+  spec.add_dependency 'activemodel'
 end

@@ -1,10 +1,13 @@
 require 'rubygems'
 require 'httparty'
+require 'active_model'
 
 require 'infostrada/core_ext/string'
 require 'infostrada/base_request'
 
 module Infostrada
+  extend ActiveModel::Serializers::JSON
+
   # The configuration of the API requests.
   class Configuration
     attr_reader :username, :password, :timeout, :base_uri
