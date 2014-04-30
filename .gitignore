@@ -1,2 +1,4 @@
 *.gem
 *.pstore
+.ruby-version
+.ruby-gemset
