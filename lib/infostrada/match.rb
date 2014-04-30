@@ -64,6 +64,8 @@ module Infostrada
     def_delegator :@goals, :away_goals, :away_goals
     def_delegator :@goals, :home_goals, :home_goals
     def_delegator :@edition, :id, :edition_id
+    def_delegator :@home_team, :id, :home_team_id
+    def_delegator :@away_team, :id, :away_team_id
 
     # We can get all matches for a given edition (very heavy payload). Or we can just get the match
     # information on a single match.
