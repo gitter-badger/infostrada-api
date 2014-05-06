@@ -26,6 +26,11 @@ module Infostrada
       self
     end
 
+    def as_json
+      hash = super
+      hash = { 'phase_id' => phase_id, 'entries' => hash }
+    end
+
     def each(&block)
       @entries.each(&block)
     end
