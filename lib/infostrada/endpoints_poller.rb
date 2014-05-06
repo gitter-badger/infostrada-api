@@ -47,8 +47,6 @@ module Infostrada
     def run
       EM.run do
         EM.add_periodic_timer(self.class.polling_frequency) do
-          puts "[#{Time.now}] Refresh since #{CallRefresh.last_update}"
-
           endpoints = EndpointChecker.new(self.class.endpoints)
 
           endpoints.callback { |endpoints| process_endpoints(endpoints) }
