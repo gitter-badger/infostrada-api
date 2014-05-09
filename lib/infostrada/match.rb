@@ -118,6 +118,7 @@ module Infostrada
       @stadium_id = hash['n_StadiumGeoID']
       @stadium_name = hash['c_Stadium']
       @spectators = hash['n_Spectators']
+      @city = hash['c_City']
 
       @live = hash['b_Live']
       @started = hash['b_Started']
