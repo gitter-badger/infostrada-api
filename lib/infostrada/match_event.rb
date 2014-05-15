@@ -37,7 +37,7 @@ module Infostrada
     attr_accessor :id, :description, :short_description, :period, :period_short, :time, :home_goals
     attr_accessor :away_goals, :home_event, :team_id, :team_name, :team_short_name, :person_id
     attr_accessor :person_name, :person_short_name, :reason, :info, :person2_id, :person2_name
-    attr_accessor :person2_short_name, :minute, :match_id, :action_set, :period_code
+    attr_accessor :person2_short_name, :minute, :match_id, :action_set, :period_code, :action_sort
 
     # These action codes are documented on the Infostrada ADVANCED PROGRAMMING documentation
     attr_accessor :action_code, :action_code_2, :action_code_3
@@ -71,6 +71,7 @@ module Infostrada
       @action_code        = hash['n_ActionCode']
       @action_code_2      = hash['n_ActionCode2']
       @action_code_3      = hash['n_ActionCode3']
+      @action_sort        = hash['n_ActionSort']
 
       self
     end
