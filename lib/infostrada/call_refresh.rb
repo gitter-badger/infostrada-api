@@ -57,9 +57,12 @@ module Infostrada
     def self.since(date)
       date = date.strftime(DATE_FORMAT)
 
-      list = get!(URL, query: { from: date, outputType: OUTPUT_TYPE, module: 'football' })
+      # UGLY UGLY hack because of the bug happening in production servers
+      # date = "#{Time.now.strftime('%F')}T00:00:00"
 
       self.last_update = api_time(Time.now)
+
+      list = get!(URL, query: { from: date, outputType: OUTPUT_TYPE, module: 'football' })
 
       endpoints = []
       list.each do |hash|
