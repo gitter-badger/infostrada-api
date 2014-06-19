@@ -58,7 +58,7 @@ module Infostrada
       date = date.strftime(DATE_FORMAT)
 
       # UGLY UGLY hack because of the bug happening in production servers
-      # date = "#{Time.now.strftime('%F')}T00:00:00"
+      date = "#{Time.now.strftime('%F')}T00:00:00"
 
       self.last_update = api_time(Time.now)
 
