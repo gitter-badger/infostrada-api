@@ -15,7 +15,7 @@ module Infostrada
     URL = '/GetPhaseList'
 
     # Short name is only set outside GetPhaseList endpoint. For example on match list.
-    attr_accessor :id, :name, :phase1_id, :phase1_name, :phase2_id, :phase2_name, :phase3_id
+    attr_accessor :id, :name, :phase1_id, :phase1_name, :phase2_id, :phase2_name, :phase3_id, :level
     attr_accessor :phase3_name, :table, :current, :currents, :start_date, :end_date, :short_name
 
     def self.where(options = {})
@@ -39,6 +39,7 @@ module Infostrada
     def initialize(hash)
       @id = hash['n_PhaseID']
       @name = hash['c_Phase']
+      @level = hash['n_PhaseLevel']
       @short_name = hash['c_PhaseShort']
       @phase1_id = hash['n_Phase1ID']
       @phase1_name = hash['c_Phase1']
