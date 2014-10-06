@@ -42,7 +42,10 @@ module Infostrada
     end
 
     def self.last_update=(date)
-      store.transaction { store[:last_update] = date }
+      store.transaction {
+        store[:last_update] = date
+        store.commit
+      }
     end
 
     def self.api_time(date)
@@ -51,27 +54,20 @@ module Infostrada
     end
 
     def self.get_latest
-      since last_update || api_time(Time.now)
+      since(last_update || api_time(Time.now))
     end
 
     def self.since(date)
-      date = date.strftime(DATE_FORMAT)
+      self.last_update = date
 
-      # UGLY UGLY hack because of the bug happening in production servers
-      date = "#{Time.now.strftime('%F')}T00:00:00"
+      date_str = date.strftime(DATE_FORMAT)
 
-      self.last_update = api_time(Time.now)
+      list = get!(URL, query: { from: date_str, outputType: OUTPUT_TYPE, module: 'football' })
 
-      list = get!(URL, query: { from: date, outputType: OUTPUT_TYPE, module: 'football' })
-
-      endpoints = []
-      list.each do |hash|
+      list.each_with_object([]) do |hash, endpoints|
         lang = hash['c_QueryString'].scan(/languagecode=(\d+)/).flatten.first.to_i
-
         endpoints << Endpoint.new(hash) if LANGUAGE_CODES.include?(lang)
       end
-
-      endpoints
     end
   end
 end
