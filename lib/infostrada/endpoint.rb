@@ -10,16 +10,22 @@ module Infostrada
       self
     end
 
-    # Helper method to return the match id from the query string.
-    def match_id
-      @query_string.match(/matchid=(\d+)/)
-      $1
+    # Defines methods for parameter ids on the c_QueryString. These can be match_id, phase_id,
+    # edition_id or team_id.
+    %w(match phase edition team).each do |param|
+      define_method("#{param}_id") do
+        scan_id(param)
+      end
     end
 
-    # Helper method to return the phase id from the query string.
-    def phase_id
-      @query_string.match(/phaseid=(\d+)/)
-      $1
+    private
+
+    # Scans for the id of a given parameter in the c_QueryString. Returns the id for the parameter.
+    #
+    # Example
+    #   => scan_id('edition') # will scan editionid number
+    def scan_id(param)
+      @query_string.match(/#{param}id=(\d+)/).captures.first
     end
   end
 end
