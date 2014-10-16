@@ -11,7 +11,7 @@ module Infostrada
     def self.fetch(team_id)
       info_hash = get!(URL, query: { teamid: team_id.to_i })
 
-      self.new(info_hash.first)
+      info_hash.first ? self.new(info_hash.first) : nil
     end
 
     def initialize(hash)
