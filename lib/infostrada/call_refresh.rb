@@ -58,7 +58,7 @@ module Infostrada
     end
 
     def self.since(date)
-      self.last_update = date
+      self.last_update = api_time(Time.now)
 
       date_str = date.strftime(DATE_FORMAT)
 
